@@ -1,0 +1,33 @@
+.shufflebtn {
+  background-color: rgba(32, 122, 240, 0.76);
+  color: azure;
+  font-family: Ink free;
+  font-weight: 800;
+  font-size: 3em;
+  width: 15rem;
+  height: 5rem;
+  margin: 2rem;
+  border-width: 2px;
+  border-radius: 0.5em;
+  border-color: rgb(5, 12, 22);
+  outline: none;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+}
+
+.shufflebtn:hover {
+  transform: scale(1.05);
+}
+.shufflebtn:active {
+  transform: scale(0.9);
+}
+.btn {
+  display: flex;
+  justify-content: center;
+}
+
+.txt {
+  color: azure;
+  font-family: ink free;
+}
