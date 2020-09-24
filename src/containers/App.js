@@ -68,7 +68,7 @@ class App extends Component {
           </button>
         </div>
         <div className='btn'>
-          <h1 className='txt'>{this.state.deck}</h1>
+          <h1 className='txt'>Deck ID: {this.state.deck}</h1>
         </div>
         <Deck frame={this.frame} cards={this.state.draw} />
       </div>
