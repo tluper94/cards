@@ -1,0 +1,25 @@
+.container {
+  display: inline-flex;
+}
+
+.slot {
+  background-color: rgba(101, 151, 99, 0.486);
+  border-width: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: white;
+  height: 210px;
+  width: 151px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ace {
+  text-align: center;
+  color: white;
+  font-family: Ink Free;
+  font-weight: 800;
+  font-size: 90px;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
-import './Card.css';
+import '../css/Card.css';
 
-function Card({ img, id, frame }) {
+function Card({ img, id }) {
   return (
-    <div>
-      <div className='moveable'>
+    <div id={id} className='card'>
+      <div>
         <img alt={id} src={img}></img>
       </div>
     </div>

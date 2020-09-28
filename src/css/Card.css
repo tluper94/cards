@@ -1,13 +1,17 @@
-.moveable {
+img {
+  max-width: 100%;
+}
+.card {
   backface-visibility: hidden;
   transform: translateZ(0);
   transition: transform 0.25s ease-out;
-  margin: 10px;
+  width: 150px;
+  margin: 5px;
 }
 
-.moveable:hover {
+.card:hover {
   transform: scale(1.05);
 }
-.moveable:active {
+.card:active {
   transform: scale(0.9);
 }

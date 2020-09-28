@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from './Card';
-import './Deck.css';
+import '../css/Deck.css';
+import { gsap } from 'gsap';
+import { Draggable } from 'gsap/Draggable';
 
-function Deck({ cards, frame }) {
+gsap.registerPlugin(Draggable);
+
+function Deck({ cards }) {
+  useEffect(() => {
+    Draggable.create('.card', {
+      bounds: '#root',
+      edgeResistance: 0.65,
+      type: 'x,y',
+    });
+  });
+
   return (
-    <div className='flex flex-wrap ma2 justify-center items-center'>
+    <div className='deck'>
       {cards.map((card, i) => {
+        console.log(cards[i].code);
         return (
-          <Card key={cards[i].code} img={cards[i].image} id={cards[i].id} />
+          <Card key={cards[i].code} img={cards[i].image} id={cards[i].code} />
         );
       })}
     </div>

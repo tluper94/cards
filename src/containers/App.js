@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import Deck from '../components/Deck';
-import './App.css';
+import '../css/App.css';
+import Slot from '../components/Slot';
+import CardSlots from '../components/CardSlots';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      id: [],
+      cards: [],
       deck: [],
       shuffle: [],
       draw: [],
-      selector: [],
     };
-    this.frame = {
-      translate: [0, 0],
-    };
-    this.shuffleCards = this.shuffleCards.bind(this);
     this.drawCards = this.drawCards.bind(this);
     this.getDeck = this.getDeck.bind(this);
+    this.getRemainingCards = this.getRemainingCards.bind(this);
   }
 
   async getDeck() {
@@ -24,29 +24,28 @@ class App extends Component {
       'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'
     );
     const data = await resp.json();
-    this.setState({ deck: data.deck_id });
+    this.setState({ id: data.deck_id });
     this.drawCards();
   }
 
   async drawCards() {
     const resp = await fetch(
-      `https://deckofcardsapi.com/api/deck/${this.state.deck}/draw/?count=52`
+      `https://deckofcardsapi.com/api/deck/${this.state.id}/draw/?count=4`
     );
     const data = await resp.json();
-    this.setState({ draw: data.cards });
+    this.setState({ deck: data });
+    this.setState({ cards: data.cards });
   }
 
-  async shuffleCards() {
-    try {
-      const resp = await fetch(
-        `https://deckofcardsapi.com/api/deck/${this.state.deck}/shuffle/`
-      );
-      const data = await resp.json();
-      this.setState({ shuffle: data });
-      this.drawCards();
-    } catch (err) {
-      console.log(err, 'Oppps something went wrong');
-    }
+  async getRemainingCards() {
+    const resp = await fetch(
+      `https://deckofcardsapi.com/api/deck/${this.state.id}/draw/?count=4`
+    );
+    const data = await resp.json();
+    let cards = this.state.cards;
+    let moreCards = data.cards;
+    let newDeck = cards.concat(moreCards);
+    this.setState({ cards: newDeck });
   }
 
   componentDidMount() {
@@ -54,23 +53,16 @@ class App extends Component {
   }
 
   render() {
-    const { draw } = this.state;
-    return !draw.length ? (
+    const { cards } = this.state;
+    return !cards.length ? (
       <h1>Loading Please Wait..........</h1>
     ) : (
       <div>
-        <div className='btn'>
-          <button onClick={this.getDeck} className='shufflebtn'>
-            Draw
-          </button>
-          <button className='shufflebtn' onClick={this.shuffleCards}>
-            Shuffle
-          </button>
+        <Slot deck={this.getDeck} draw={this.getRemainingCards} />
+        <div className='cardslots'>
+          <CardSlots />
         </div>
-        <div className='btn'>
-          <h1 className='txt'>Deck ID: {this.state.deck}</h1>
-        </div>
-        <Deck frame={this.frame} cards={this.state.draw} />
+        <Deck cards={cards} />
       </div>
     );
   }
