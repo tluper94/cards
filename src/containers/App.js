@@ -30,7 +30,7 @@ class App extends Component {
 
   async drawCards() {
     const resp = await fetch(
-      `https://deckofcardsapi.com/api/deck/${this.state.id}/draw/?count=4`
+      `https://deckofcardsapi.com/api/deck/${this.state.id}/draw/?count=10`
     );
     const data = await resp.json();
     this.setState({ deck: data });
@@ -42,9 +42,9 @@ class App extends Component {
       `https://deckofcardsapi.com/api/deck/${this.state.id}/draw/?count=4`
     );
     const data = await resp.json();
-    let cards = this.state.cards;
-    let moreCards = data.cards;
-    let newDeck = cards.concat(moreCards);
+    const cards = this.state.cards;
+    const moreCards = data.cards;
+    const newDeck = cards.concat(moreCards);
     this.setState({ cards: newDeck });
   }
 

@@ -10,8 +10,15 @@ function Deck({ cards }) {
   useEffect(() => {
     Draggable.create('.card', {
       bounds: '#root',
-      edgeResistance: 0.65,
+      dragResistance: 0.1,
+      edgeResistance: 0.1,
+      autoScroll: 1,
       type: 'x,y',
+    });
+    gsap.to('.card', {
+      x: 0,
+      y: 0,
+      snap: 'x,y',
     });
   });
 
